@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIPPING - Secure, Fast & Private PDF Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #276cf5;
+            --primary-orange: #F08000;
+            --primary-green: #2ecc71;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #343a40;
+            --white: #ffffff;
+            --golden: #FFD700;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Aldrich', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+            animation: pulse 2s infinite alternate;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-subtext {
+            font-size: 0.7rem;
+            color: var(--dark-gray);
+            letter-spacing: 1px;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .cta-button {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            border: 3px solid var(--primary-blue);
+            border-radius: var(--border-radius);
+            padding: 0.8rem 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(39, 108, 245, 0.3);
+        }
+
+        .login-button {
+            background-color: var(--golden);
+            color: var(--dark-gray);
+            border: 3px solid var(--primary-blue);
+            border-radius: 8px;
+            padding: 0.8rem 1.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .login-button:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background-color: var(--white);
+            color: var(--dark-gray);
+            border: 2px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            padding: 0.8rem 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-btn:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 220px;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            z-index: 1;
+            padding: 0.5rem 0;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-item {
+            color: var(--dark-gray);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+            color: var(--primary-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .lock-icon {
+            color: var(--golden);
+            font-size: 1.8rem;
+        }
+
+        /* Ad Banner */
+        .ad-banner {
+            background-color: var(--medium-gray);
+            border: 1px dashed var(--dark-gray);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Drag & Drop Area */
+        .upload-area {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 3rem;
+            background-color: var(--white);
+            border: 3px dashed var(--primary-green);
+            border-radius: var(--border-radius);
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .upload-area.active {
+            border-color: var(--primary-blue);
+            background-color: rgba(39, 108, 245, 0.05);
+            animation: pulseGlow 1.5s infinite alternate;
+        }
+
+        .upload-icon {
+            font-size: 5rem;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .upload-area h3 {
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .file-input-label {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border: 3px solid var(--primary-blue);
+            border-radius: var(--border-radius);
+            padding: 1rem 2.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .file-input-label:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(39, 108, 245, 0.3);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* File Preview */
+        .file-preview {
+            display: none;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .file-icon {
+            font-size: 3.5rem;
+            color: var(--primary-blue);
+        }
+
+        .file-details h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Processing Section with Ad */
+        .processing-section {
+            display: none;
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .processing-ad {
+            background-color: var(--medium-gray);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ad-text {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .countdown {
+            font-size: 2rem;
+            color: var(--primary-orange);
+            margin: 1rem 0;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--medium-gray);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-green);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Tools Sections */
+        .tools-section {
+            padding: 4rem 2rem;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-gray);
+        }
+
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background-color: var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            height: 350px;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            transition: transform 0.8s;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-radius: var(--border-radius);
+        }
+
+        .tool-card:hover .card-front {
+            transform: rotateY(180deg);
+        }
+
+        .tool-card:hover .card-back {
+            transform: rotateY(0deg);
+        }
+
+        .tool-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .converter-icon {
+            color: var(--primary-blue);
+        }
+
+        .compressor-icon {
+            color: var(--primary-green);
+        }
+
+        .tool-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .tool-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--white);
+            padding: 3rem 2rem 1.5rem;
+            border-top: 1px solid var(--medium-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+        }
+
+        .contact-info a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+
+        .youtube { background-color: #FF0000; }
+        .tiktok { background-color: #000000; }
+        .instagram { background: linear-gradient(45deg, #405DE6, #E1306C); }
+        .linkedin { background-color: #0077B5; }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--medium-gray);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { opacity: 0.9; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(39, 108, 245, 0.3); }
+            100% { box-shadow: 0 0 25px rgba(39, 108, 245, 0.7); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+            
+            .nav-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+            
+            .cta-button, .dropdown-btn, .login-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .tools-section {
+                padding: 3rem 1rem;
+            }
+            
+            .tool-card {
+                height: 320px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                display: none;
+                background-color: var(--light-gray);
+                margin-top: 0.5rem;
+                border-radius: 8px;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .upload-icon {
+                font-size: 3.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-placeholder">
+                <div class="logo-text">FLIPPING</div>
+                <div class="logo-subtext">FLIP FILE &bull; NOT PRIVACY</div>
+            </div>
+        </div>
+        
+        <div class="nav-container">
+            <div class="nav-buttons">
+                <div class="dropdown">
+                    <button class="dropdown-btn cta-button">
+                        <i class="fas fa-exchange-alt"></i> Converter
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-file-pdf" style="color: #FF0000;"></i> PDF Converter
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-image" style="color: #2ecc71;"></i> Image Files
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-file-word" style="color: #2b579a;"></i> Document Files
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <button class="dropdown-btn cta-button">
+                        <i class="fas fa-compress-alt"></i> Compressor
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-file-pdf" style="color: #FF0000;"></i> PDF Compressor
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-image" style="color: #2ecc71;"></i> Image Files
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-file-word" style="color: #2b579a;"></i> Document Files
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="login-button">
+                <i class="fas fa-user"></i> Login
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Free, Secure, Fast & Private PDF Tools Conversions!</h1>
+        <div class="hero-subtitle">
+            <i class="fas fa-lock lock-icon"></i>
+            <span>Files are deleted instantly after flipping</span>
+        </div>
+        
+        <!-- Ad Banner -->
+        <div class="ad-banner">
+            <p>Advertisement Slot - Google AdSense</p>
+            <div style="background-color: #e9ecef; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                Ad Unit (728x90)
+            </div>
+        </div>
+        
+        <!-- Drag & Drop Area -->
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <h3>Drop your files here or click to upload</h3>
+            <p>Supported formats: PDF, JPG, JPEG, SVG, WORD, EXCEL, TIFF</p>
+            <label for="fileInput" class="file-input-label">
+                <i class="fas fa-file-upload"></i> Select File
+            </label>
+            <input type="file" id="fileInput" class="file-input" accept=".pdf,.jpg,.jpeg,.svg,.doc,.docx,.xls,.xlsx,.tiff">
+        </div>
+        
+        <!-- File Preview -->
+        <div class="file-preview" id="filePreview">
+            <div class="file-info">
+                <div class="file-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div class="file-details">
+                    <h4 id="fileName">sample-document.pdf</h4>
+                    <p id="fileSize">2.4 MB</p>
+                    <p id="fileType">PDF Document</p>
+                </div>
+            </div>
+            <button class="cta-button" id="processBtn">
+                <i class="fas fa-cogs"></i> Process File
+            </button>
+        </div>
+        
+        <!-- Processing Section with Ad -->
+        <div class="processing-section" id="processingSection">
+            <div class="processing-ad">
+                <p class="ad-text">Processing your file securely - This slot is for non-intrusive ads</p>
+                <div style="background-color: #f1f3f4; width: 100%; height: 250px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin: 1rem 0;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Ad Unit (300x250)</div>
+                        <div style="font-size: 0.8rem; color: #999;">Google AdSense</div>
+                    </div>
+                </div>
+                <div class="countdown" id="countdown">5</div>
+                <p>Your file is being processed securely...</p>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            
+            <p>Files are encrypted during processing and deleted immediately after</p>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools-section">
+        <h2 class="section-title">Our Powerful Tools</h2>
+        
+        <div class="tools-container">
+            <!-- PDF Converter Card -->
+            <div class="tool-card">
+                <div class="card-front">
+                    <div class="tool-icon converter-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>PDF Converter</h3>
+                    <p>Convert your PDF files to various formats and vice versa with maximum security and privacy.</p>
+                    <div class="cta-button">Learn More</div>
+                </div>
+                <div class="card-back">
+                    <h3>Supported Formats</h3>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>PDF to Word, Excel, PowerPoint</li>
+                        <li>Images (JPG, PNG, TIFF) to PDF</li>
+                        <li>PDF to Images</li>
+                        <li>HTML to PDF</li>
+                    </ul>
+                    <div class="cta-button" style="margin-top: 2rem; background-color: white; color: var(--primary-blue);">Try Now</div>
+                </div>
+            </div>
+            
+            <!-- PDF Compressor Card -->
+            <div class="tool-card">
+                <div class="card-front">
+                    <div class="tool-icon compressor-icon">
+                        <i class="fas fa-compress-alt"></i>
+                    </div>
+                    <h3>PDF Compressor</h3>
+                    <p>Reduce PDF file size without losing quality. Achieve 50-80% reduction while maintaining readability.</p>
+                    <div class="cta-button">Learn More</div>
+                </div>
+                <div class="card-back">
+                    <h3>Compression Features</h3>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>Reduce size up to 80%</li>
+                        <li>No quality loss</li>
+                        <li>Batch processing</li>
+                        <li>Optimized for web & mobile</li>
+                    </ul>
+                    <div class="cta-button" style="margin-top: 2rem; background-color: white; color: var(--primary-blue);">Try Now</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">FLIPPING</div>
+                <p>Flip your files securely today!</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:cyview4u@gmail.com">cyview4u@gmail.com</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <div class="footer-links">
+                    <a href="#">Blog</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Feedback</a>
+                    <a href="#">API Documentation</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-icon tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 FLIPPING. All rights reserved. | FLIP FILE &bull; NOT PRIVACY</p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const fileType = document.getElementById('fileType');
+        const processBtn = document.getElementById('processBtn');
+        const processingSection = document.getElementById('processingSection');
+        const countdown = document.getElementById('countdown');
+        const progressBar = document.getElementById('progressBar');
+        
+        // File upload handling
+        fileInput.addEventListener('change', handleFileSelect);
+        
+        // Drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            uploadArea.classList.add('active');
+        }
+        
+        function unhighlight() {
+            uploadArea.classList.remove('active');
+        }
+        
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+        
+        function handleFileSelect(e) {
+            const files = e.target.files;
+            handleFiles(files);
+        }
+        
+        function handleFiles(files) {
+            if (files.length === 0) return;
+            
+            const file = files[0];
+            const fileSizeInMB = (file.size / (1024 * 1024)).toFixed(1);
+            const fileExtension = file.name.split('.').pop().toUpperCase();
+            
+            // Update file preview
+            fileName.textContent = file.name;
+            fileSize.textContent = `${fileSizeInMB} MB`;
+            fileType.textContent = `${fileExtension} File`;
+            
+            // Change icon based on file type
+            const fileIcon = document.querySelector('.file-icon i');
+            if (file.type.includes('image')) {
+                fileIcon.className = 'fas fa-image';
+                fileIcon.style.color = '#2ecc71';
+            } else if (file.type.includes('pdf')) {
+                fileIcon.className = 'fas fa-file-pdf';
+                fileIcon.style.color = '#FF0000';
+            } else if (file.type.includes('document') || file.type.includes('msword') || file.type.includes('wordprocessingml')) {
+                fileIcon.className = 'fas fa-file-word';
+                fileIcon.style.color = '#2b579a';
+            } else if (file.type.includes('spreadsheet') || file.type.includes('excel')) {
+                fileIcon.className = 'fas fa-file-excel';
+                fileIcon.style.color = '#217346';
+            }
+            
+            // Show file preview and hide upload area
+            uploadArea.style.display = 'none';
+            filePreview.style.display = 'block';
+        }
+        
+        // Process file button
+        processBtn.addEventListener('click', processFile);
+        
+        function processFile() {
+            // Hide file preview and show processing section
+            filePreview.style.display = 'none';
+            processingSection.style.display = 'block';
+            
+            // Start countdown and progress bar
+            let seconds = 5;
+            let progress = 0;
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                countdown.textContent = seconds;
+                
+                progress += 20;
+                progressBar.style.width = `${progress}%`;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    
+                    // Simulate file processing completion
+                    setTimeout(() => {
+                        processingSection.innerHTML = `
+                            <div style="text-align: center; padding: 3rem;">
+                                <div style="font-size: 4rem; color: #2ecc71; margin-bottom: 1.5rem;">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h3 style="margin-bottom: 1rem;">File Processed Successfully!</h3>
+                                <p style="margin-bottom: 2rem;">Your file has been processed securely and is ready to download.</p>
+                                <button class="cta-button" id="downloadBtn" style="background-color: #2ecc71; color: white;">
+                                    <i class="fas fa-download"></i> Download Processed File
+                                </button>
+                                <button class="cta-button" id="newFileBtn" style="margin-left: 1rem;">
+                                    <i class="fas fa-file-upload"></i> Process Another File
+                                </button>
+                            </div>
+                        `;
+                        
+                        // Add event listeners to new buttons
+                        document.getElementById('downloadBtn').addEventListener('click', () => {
+                            alert('File download started! In a real implementation, this would trigger the actual file download.');
+                        });
+                        
+                        document.getElementById('newFileBtn').addEventListener('click', () => {
+                            // Reset the interface
+                            uploadArea.style.display = 'block';
+                            processingSection.style.display = 'none';
+                            fileInput.value = '';
+                            countdown.textContent = '5';
+                            progressBar.style.width = '0%';
+                        });
+                    }, 500);
+                }
+            }, 1000);
+        }
+        
+        // Tool card animations
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) rotateY(180deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotateY(0deg)';
+            });
+        });
+        
+        // Mobile menu toggle for dropdowns
+        if (window.innerWidth <= 576) {
+            document.querySelectorAll('.dropdown-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dropdownContent = this.nextElementSibling;
+                    const isVisible = dropdownContent.style.display === 'block';
+                    
+                    // Close all other dropdowns
+                    document.querySelectorAll('.dropdown-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    
+                    // Toggle this dropdown
+                    dropdownContent.style.display = isVisible ? 'none' : 'block';
+                });
+            });
+            
+            // Close dropdowns when clicking elsewhere
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.dropdown-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
