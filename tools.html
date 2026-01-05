@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlipFile Tools - Image Compressor, Converter & PDF Tools</title>
+    <meta name="description" content="Free online tools for image compression, format conversion, and PDF security. All files processed securely and deleted immediately.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Aldrich&family=Black+Ops+One&family=Teko:wght@300;400;500;600&family=Averia+Libre:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <a href="index.html" class="logo-container">
+            <div class="logo-icon">
+                <i class="fas fa-file-pdf"></i>
+            </div>
+            <div>
+                <div class="logo-text">
+                    <span class="flip">Flip</span><span class="file">File</span>
+                </div>
+                <div class="logo-slogan">FlipFast.StaySecure</div>
+            </div>
+        </a>
+        
+        <div class="nav-buttons">
+            <a href="pdf-tools.html" class="nav-button">PDF Unlock/Lock</a>
+            
+            <div class="dropdown">
+                <a href="converter.html" class="nav-button">Converter</a>
+                <div class="dropdown-content">
+                    <div class="dropdown-section">
+                        <div class="dropdown-header">
+                            <i class="fas fa-image"></i>
+                            Image Files
+                        </div>
+                        <div class="dropdown-items">
+                            <a href="converter.html?type=jpg" class="dropdown-item image-item">
+                                <i class="fas fa-file-image jpg-icon"></i>
+                                <span>JPG</span>
+                            </a>
+                            <a href="converter.html?type=png" class="dropdown-item image-item">
+                                <i class="fas fa-file-image png-icon"></i>
+                                <span>PNG</span>
+                            </a>
+                            <a href="converter.html?type=svg" class="dropdown-item image-item">
+                                <i class="fas fa-file-code svg-icon"></i>
+                                <span>SVG</span>
+                            </a>
+                            <a href="converter.html?type=webp" class="dropdown-item image-item">
+                                <i class="fas fa-file-image webp-icon"></i>
+                                <span>WEBP</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-section">
+                        <div class="dropdown-header">
+                            <i class="fas fa-file-alt"></i>
+                            Document Files
+                        </div>
+                        <div class="dropdown-items">
+                            <a href="converter.html?type=pdf" class="dropdown-item document-item">
+                                <i class="fas fa-file-pdf pdf-icon"></i>
+                                <span>PDF</span>
+                            </a>
+                            <a href="converter.html?type=doc" class="dropdown-item document-item">
+                                <i class="fas fa-file-word doc-icon"></i>
+                                <span>DOC</span>
+                            </a>
+                            <a href="converter.html?type=xls" class="dropdown-item document-item">
+                                <i class="fas fa-file-excel xls-icon"></i>
+                                <span>XLS</span>
+                            </a>
+                            <a href="converter.html?type=ppt" class="dropdown-item document-item">
+                                <i class="fas fa-file-powerpoint ppt-icon"></i>
+                                <span>PPT</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dropdown">
+                <a href="compressor.html" class="nav-button">Compressor</a>
+                <div class="dropdown-content">
+                    <div class="dropdown-section">
+                        <div class="dropdown-header">
+                            <i class="fas fa-file-image"></i>
+                            Image Files
+                        </div>
+                        <div class="dropdown-items">
+                            <a href="compressor.html?type=jpg" class="dropdown-item image-item">
+                                <i class="fas fa-file-image jpg-icon"></i>
+                                <span>JPG</span>
+                            </a>
+                            <a href="compressor.html?type=png" class="dropdown-item image-item">
+                                <i class="fas fa-file-image png-icon"></i>
+                                <span>PNG</span>
+                            </a>
+                            <a href="compressor.html?type=svg" class="dropdown-item image-item">
+                                <i class="fas fa-file-code svg-icon"></i>
+                                <span>SVG</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-section">
+                        <div class="dropdown-header">
+                            <i class="fas fa-file-contract"></i>
+                            Document Files
+                        </div>
+                        <div class="dropdown-items">
+                            <a href="compressor.html?type=pdf" class="dropdown-item document-item">
+                                <i class="fas fa-file-pdf pdf-icon"></i>
+                                <span>PDF</span>
+                            </a>
+                            <a href="compressor.html?type=doc" class="dropdown-item document-item">
+                                <i class="fas fa-file-word doc-icon"></i>
+                                <span>DOC</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#" class="nav-button login-btn">Login</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-meta">All-In-One File Processing Tools</div>
+        <h1 class="hero-headline">Professional Tools for Images & Documents</h1>
+        <div class="hero-subheadline">
+            <i class="fas fa-shield-alt"></i>
+            <span>100% Secure Processing - Files Deleted Immediately</span>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="content-section">
+        <h2 class="section-title">Choose Your Tool</h2>
+        
+        <div class="tools-container">
+            <!-- Image Compressor Tool -->
+            <div class="tool-window">
+                <div class="tool-header">
+                    <i class="fas fa-compress-alt"></i>
+                    <h3>Image Compressor</h3>
+                    <p>Reduce image size without losing quality</p>
+                </div>
+                <div class="tool-body">
+                    <div class="drag-drop-area">
+                        <div class="drag-drop-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="drag-drop-text">Drop your images here or click to browse</div>
+                        <button class="select-file-btn">Select Image</button>
+                        <input type="file" accept="image/*" style="display: none;">
+                        
+                        <div class="file-types">
+                            <div class="file-type jpg">
+                                <i class="fas fa-file-image"></i>
+                                <span>JPG</span>
+                            </div>
+                            <div class="file-type png">
+                                <i class="fas fa-file-image"></i>
+                                <span>PNG</span>
+                            </div>
+                            <div class="file-type svg">
+                                <i class="fas fa-file-code"></i>
+                                <span>SVG</span>
+                            </div>
+                            <div class="file-type webp">
+                                <i class="fas fa-file-image"></i>
+                                <span>WEBP</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-option">
+                        <label for="qualitySlider">Compression Quality: <span id="qualityValue">80%</span></label>
+                        <input type="range" id="qualitySlider" min="10" max="100" value="80" step="5">
+                    </div>
+                    
+                    <div class="tool-option">
+                        <label>Maximum Dimensions:</label>
+                        <div style="display: flex; gap: 15px;">
+                            <input type="number" placeholder="Width" value="1920" style="flex: 1;">
+                            <input type="number" placeholder="Height" value="1080" style="flex: 1;">
+                        </div>
+                    </div>
+                    
+                    <button class="select-file-btn process-btn" style="width: 100%; margin-top: 20px;">
+                        <i class="fas fa-cogs"></i> Compress Image
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Image Converter Tool -->
+            <div class="tool-window">
+                <div class="tool-header">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Image Converter</h3>
+                    <p>Convert between image formats</p>
+                </div>
+                <div class="tool-body">
+                    <div class="drag-drop-area">
+                        <div class="drag-drop-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="drag-drop-text">Drop your images here or click to browse</div>
+                        <button class="select-file-btn">Select Image</button>
+                        <input type="file" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div class="tool-option">
+                        <label>Convert To:</label>
+                        <div class="option-grid">
+                            <div class="option-card active" data-value="jpg">
+                                <i class="fas fa-file-image" style="color: #10B981;"></i>
+                                <span>JPG</span>
+                            </div>
+                            <div class="option-card" data-value="png">
+                                <i class="fas fa-file-image" style="color: #3B82F6;"></i>
+                                <span>PNG</span>
+                            </div>
+                            <div class="option-card" data-value="webp">
+                                <i class="fas fa-file-image" style="color: #0EA5E9;"></i>
+                                <span>WEBP</span>
+                            </div>
+                            <div class="option-card" data-value="svg">
+                                <i class="fas fa-file-code" style="color: #F59E0B;"></i>
+                                <span>SVG</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-option">
+                        <label>Output Quality:</label>
+                        <select id="formatSelect" style="width: 100%;">
+                            <option value="high">High Quality (Recommended)</option>
+                            <option value="medium">Medium Quality</option>
+                            <option value="low">Maximum Compression</option>
+                        </select>
+                    </div>
+                    
+                    <button class="select-file-btn process-btn" style="width: 100%; margin-top: 20px;">
+                        <i class="fas fa-sync-alt"></i> Convert Image
+                    </button>
+                </div>
+            </div>
+            
+            <!-- PDF Tools -->
+            <div class="tool-window">
+                <div class="tool-header">
+                    <i class="fas fa-lock"></i>
+                    <h3>PDF Security Tools</h3>
+                    <p>Lock/Unlock PDF files</p>
+                </div>
+                <div class="tool-body">
+                    <div class="drag-drop-area">
+                        <div class="drag-drop-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="drag-drop-text">Drop your PDF here or click to browse</div>
+                        <button class="select-file-btn">Select PDF</button>
+                        <input type="file" accept=".pdf" style="display: none;">
+                    </div>
+                    
+                    <div class="pdf-options">
+                        <div class="tool-option">
+                            <label>Action:</label>
+                            <div style="display: flex; gap: 20px; margin-top: 10px;">
+                                <label style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="radio" name="pdf-action" value="lock-pdf" checked>
+                                    <i class="fas fa-lock"></i> Lock PDF
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="radio" name="pdf-action" value="unlock-pdf">
+                                    <i class="fas fa-unlock"></i> Unlock PDF
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-option">
+                            <label for="pdfPassword">Password:</label>
+                            <div class="password-input">
+                                <input type="password" id="pdfPassword" placeholder="Enter password" style="width: 100%;">
+                                <button type="button" class="password-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-option">
+                            <label>Permissions:</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+                                <label style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox" checked>
+                                    <span>Printing</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox" checked>
+                                    <span>Copy Text</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox">
+                                    <span>Editing</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox" checked>
+                                    <span>Annotations</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="select-file-btn process-btn" style="width: 100%;">
+                        <i class="fas fa-shield-alt"></i> Secure PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Processing Section -->
+        <div class="processing-section">
+            <h3 style="text-align: center; margin-bottom: 20px;">
+                <i class="fas fa-cogs"></i> Processing Your File
+            </h3>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div id="processingText">Initializing secure processing...</div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; color: #64748B;">
+                <i class="fas fa-shield-alt"></i>
+                <small>Your file is being processed with military-grade encryption</small>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results-section">
+            <h3 style="text-align: center; margin-bottom: 20px;">
+                <i class="fas fa-check-circle" style="color: #10B981;"></i>
+                Processing Complete!
+            </h3>
+            
+            <div class="result-stats">
+                <div class="stat-card">
+                    <i class="fas fa-file"></i>
+                    <div>Original Size</div>
+                    <div id="originalSize" style="font-weight: bold;">0 MB</div>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-compress-alt"></i>
+                    <div>Compressed Size</div>
+                    <div id="compressedSize" style="font-weight: bold; color: #10B981;">0 MB</div>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div>Size Reduction</div>
+                    <div id="reductionPercent" style="font-weight: bold;">0%</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <button class="select-file-btn download-btn" style="padding: 15px 40px;">
+                    <i class="fas fa-download"></i> Download Processed File
+                </button>
+            </div>
+            
+            <div style="text-align: center; color: #64748B;">
+                <i class="fas fa-info-circle"></i>
+                <small>This file will be automatically deleted from our servers in 1 hour</small>
+            </div>
+        </div>
+        
+        <!-- Ad Section -->
+        <div class="ad-section" style="margin-top: 60px;">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-container">
+                Upgrade to Premium for faster processing and no ads!
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Section -->
+    <section class="content-section" style="padding-top: 0;">
+        <div class="seo-section">
+            <h3>Professional File Processing Made Simple</h3>
+            <p>FlipFile provides industry-leading tools for all your file processing needs. Whether you need to compress images for web use, convert between formats, or secure your PDF documents, our tools deliver professional results with military-grade security.</p>
+            <p>All processing happens in secure, isolated environments with automatic file deletion. We never store your files permanently, ensuring complete privacy and security for your sensitive documents.</p>
+            <p>Our advanced algorithms achieve up to 80% compression without noticeable quality loss, making it perfect for web developers, graphic designers, and businesses that need to optimize their digital assets.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:cyview4u@gmail.com">cyview4u@gmail.com</a></li>
+                    <li><i class="fas fa-globe"></i> <a href="https://www.flipfile.online" target="_blank">www.flipfile.online</a></li>
+                    <li><i class="fas fa-quote-left"></i> "The swift shift for your secure files."</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><i class="fas fa-shield-alt"></i> <a href="privacy.html">Privacy Policy</a></li>
+                    <li><i class="fas fa-file-contract"></i> <a href="terms.html">Terms of Service</a></li>
+                    <li><i class="fas fa-cookie-bite"></i> <a href="cookies.html">Cookie Policy</a></li>
+                    <li><i class="fas fa-database"></i> <a href="data-protection.html">Data Protection</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><i class="fas fa-blog"></i> <a href="blog.html">Blog</a></li>
+                    <li><i class="fas fa-question-circle"></i> <a href="faq.html">FAQ</a></li>
+                    <li><i class="fas fa-comment-dots"></i> <a href="feedback.html">Feedback</a></li>
+                    <li><i class="fas fa-headset"></i> <a href="support.html">Support Center</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Stay connected with FlipFile for updates and tips on file security.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 FlipFile. All rights reserved. | Designed with security and privacy in mind.</p>
+            <p class="footer-meta">The swift shift for your secure files.</p>
+        </div>
+    </footer>
+
+    <!-- File Processing Modal -->
+    <div class="processing-modal" id="processingModal">
+        <div class="modal-content">
+            <div class="processing-spinner"></div>
+            <h3>Processing Your File Securely</h3>
+            <p id="processingText">Encrypting and optimizing your file...</p>
+            <div class="ad-container" style="margin-top: 20px; height: 80px;">
+                <i class="fas fa-crown" style="color: #F59E0B;"></i>
+                <div>Upgrade to Premium for instant processing!</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize quality slider
+        const qualitySlider = document.getElementById('qualitySlider');
+        const qualityValue = document.getElementById('qualityValue');
+        
+        if (qualitySlider && qualityValue) {
+            qualitySlider.addEventListener('input', function() {
+                qualityValue.textContent = this.value + '%';
+            });
+        }
+    </script>
+</body>
+</html>
