@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - FlipFile.Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { line-height: 1.6; color: #333; background-color: #f8f9fa; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header & Navigation */
+        header { background: linear-gradient(135deg, #2c3e50, #4a6491); color: white; padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; }
+        .logo span { color: #4fc3f7; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 2rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #4fc3f7; }
+
+        /* Main Content */
+        main { padding: 3rem 0; }
+        .page-header { text-align: center; margin-bottom: 3rem; }
+        .page-header h1 { font-size: 2.8rem; color: #2c3e50; margin-bottom: 0.5rem; }
+        .page-header p { font-size: 1.2rem; color: #7f8c8d; max-width: 700px; margin: 0 auto; }
+
+        /* Support Sections */
+        .support-section { background: white; border-radius: 10px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .support-section h2 { color: #2c3e50; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 3px solid #4fc3f7; display: inline-block; }
+        .support-section i { color: #4fc3f7; margin-right: 10px; }
+
+        /* Form */
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        input, select, textarea { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; }
+        button { background: linear-gradient(to right, #2c3e50, #4a6491); color: white; border: none; padding: 0.9rem 2rem; border-radius: 5px; font-size: 1.1rem; cursor: pointer; transition: opacity 0.3s; }
+        button:hover { opacity: 0.9; }
+
+        /* FAQ */
+        .faq-item { margin-bottom: 1.2rem; border-bottom: 1px solid #eee; padding-bottom: 1.2rem; }
+        .faq-question { font-weight: 700; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; margin-top: 0.8rem; color: #555; }
+        .faq-answer.open { max-height: 300px; }
+
+        /* Contact Info */
+        .contact-info div { display: flex; align-items: center; margin-bottom: 1.2rem; }
+        .contact-info i { font-size: 1.3rem; min-width: 40px; }
+
+        /* Footer */
+        footer { background: #2c3e50; color: #ecf0f1; text-align: center; padding: 2rem 0; margin-top: 3rem; }
+        .footer-links a { color: #bdc3c7; margin: 0 1rem; text-decoration: none; }
+        .footer-links a:hover { color: #4fc3f7; }
+        .copyright { margin-top: 1.2rem; font-size: 0.9rem; color: #95a5a6; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">FlipFile<span>.Online</span></div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="features.html">Features</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="support.html" class="active">Support</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>How Can We Help You?</h1>
+            <p>Find answers in our FAQ, contact our team directly, or explore documentation. We're here to ensure you get the most out of FlipFile.Online.</p>
+        </div>
+
+        <section class="support-section">
+            <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">How do I create my first digital flipbook? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">After signing up, go to your Dashboard and click 'Create New'. Upload your PDF file, customize the settings, and click 'Publish'. Your flipbook will be ready with a shareable link.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What file formats are supported? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">We currently support PDF, PPT, PPTX, and DOCX files. For best results, we recommend using PDF files for consistent formatting.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I track who views my flipbook? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Yes! Our Pro and Business plans include detailed analytics that show you viewer counts, geographic location, and time spent on each page.</div>
+            </div>
+        </section>
+
+        <section class="support-section">
+            <h2><i class="fas fa-envelope"></i> Contact Our Support Team</h2>
+            <p>Can't find what you're looking for? Send us a message and we'll get back to you within 24 hours.</p>
+            <form id="supportForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="topic">Topic *</label>
+                    <select id="topic" name="topic" required>
+                        <option value="">Select an issue...</option>
+                        <option value="technical">Technical Problem</option>
+                        <option value="billing">Billing & Account</option>
+                        <option value="feature">Feature Request</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message *</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Please describe your issue in detail..."></textarea>
+                </div>
+                <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+            </form>
+        </section>
+
+        <section class="support-section">
+            <h2><i class="fas fa-headset"></i> Other Ways to Get Help</h2>
+            <div class="contact-info">
+                <div><i class="fas fa-book"></i> <div><strong>Knowledge Base:</strong> <a href="#" style="color: #4fc3f7;">Browse our detailed guides and tutorials</a></div></div>
+                <div><i class="fas fa-envelope"></i> <div><strong>Email Support:</strong> support@flipfile.online</div></div>
+                <div><i class="fas fa-phone"></i> <div><strong>Phone (Business Hours):</strong> +1 (800) 123-4567</div></div>
+                <div><i class="fas fa-comment-dots"></i> <div><strong>Live Chat:</strong> Available to Pro and Business plan users from within the dashboard.</div></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookies.html">Cookie Policy</a>
+                <a href="status.html">System Status</a>
+            </div>
+            <div class="copyright">
+                &copy; 2026 FlipFile.Online. All rights reserved. | This help center is powered by our awesome support team.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.classList.toggle('open');
+                const icon = question.querySelector('i');
+                icon.style.transform = answer.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+
+        // Basic form submission feedback (for demonstration)
+        document.getElementById('supportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! Your support request has been submitted. We will contact you within 24 hours.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
