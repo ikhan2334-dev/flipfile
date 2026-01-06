@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image & Document Converter - FlipFile | Convert Files Securely</title>
+    <meta name="description" content="Free online image and document converter. Convert between PDF, JPG, PNG, Word, Excel, and more. All files deleted immediately after conversion.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Aldrich&family=Black+Ops+One&family=Teko:wght@300;400;500;600&family=Averia+Libre:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .converter-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .converter-side {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .converter-side h3 {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            text-align: center;
+            font-family: 'Aldrich', sans-serif;
+        }
+        
+        .format-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .format-card {
+            background: #F8FAFC;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .format-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .format-card.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .format-card.active i {
+            color: white !important;
+        }
+        
+        .format-card i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .converter-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+        
+        .file-info-display {
+            background: #F8FAFC;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 30px 0;
+            display: none;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .info-item {
+            text-align: center;
+        }
+        
+        .info-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .advanced-options {
+            background: #F0F9FF;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .option-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .option-row > div {
+            flex: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .converter-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .format-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .format-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .option-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <a href="index.html" class="logo-container">
+            <div class="logo-icon">
+                <i class="fas fa-file-pdf"></i>
+            </div>
+            <div>
+                <div class="logo-text">
+                    <span class="flip">Flip</span><span class="file">File</span>
+                </div>
+                <div class="logo-slogan">FlipFast.StaySecure</div>
+            </div>
+        </a>
+        
+        <div class="nav-buttons">
+            <a href="pdf-tools.html" class="nav-button">PDF Unlock/Lock</a>
+            
+            <div class="dropdown">
+                <a href="converter.html" class="nav-button">Converter</a>
+                <div class="dropdown-content">
+                    <div class="dropdown-section">
+                        <div class="dropdown-header">
+                            <i class="fas fa-image"></i>
+                            Image Files
+                        </div>
+                        <div class="dropdown-items">
+                            <a href="converter.html?type=jpg" class="dropdown-item image-item">
+                                <i class="fas fa-file-image jpg-icon"></i>
+                                <span>JPG</span>
+                            </a>
+                            <a href="converter.html?type=png" class="dropdown-item image-item">
+                                <i class="fas fa-file-image png-icon"></i>
+                                <span>PNG</span>
+                            </a>
+                            <a href="converter.html?type=svg" class="dropdown-item image-item">
+                                <i class="fas fa-file-code svg-icon"></i>
+                                <span>SVG</span>
+                            </a>
+                            <a href="converter.html?type=webp" class="dropdown-item image-item">
+                                <i class="fas fa-file-image webp-icon"></i>
+                                <span>WEBP</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-section">
+                        <div class="dropdown-header">
+                            <i class="fas fa-file-alt"></i>
+                            Document Files
+                        </div>
+                        <div class="dropdown-items">
+                            <a href="converter.html?type=pdf" class="dropdown-item document-item">
+                                <i class="fas fa-file-pdf pdf-icon"></i>
+                                <span>PDF</span>
+                            </a>
+                            <a href="converter.html?type=doc" class="dropdown-item document-item">
+                                <i class="fas fa-file-word doc-icon"></i>
+                                <span>DOC</span>
+                            </a>
+                            <a href="converter.html?type=xls" class="dropdown-item document-item">
+                                <i class="fas fa-file-excel xls-icon"></i>
+                                <span>XLS</span>
+                            </a>
+                            <a href="converter.html?type=ppt" class="dropdown-item document-item">
+                                <i class="fas fa-file-powerpoint ppt-icon"></i>
+                                <span>PPT</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dropdown">
+                <a href="compressor.html" class="nav-button">Compressor</a>
+                <div class="dropdown-content">
+                    <div class="dropdown-section">
+                        <div class="dropdown-header">
+                            <i class="fas fa-file-image"></i>
+                            Image Files
+                        </div>
+                        <div class="dropdown-items">
+                            <a href="compressor.html?type=jpg" class="dropdown-item image-item">
+                                <i class="fas fa-file-image jpg-icon"></i>
+                                <span>JPG</span>
+                            </a>
+                            <a href="compressor.html?type=png" class="dropdown-item image-item">
+                                <i class="fas fa-file-image png-icon"></i>
+                                <span>PNG</span>
+                            </a>
+                            <a href="compressor.html?type=svg" class="dropdown-item image-item">
+                                <i class="fas fa-file-code svg-icon"></i>
+                                <span>SVG</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-section">
+                        <div class="dropdown-header">
+                            <i class="fas fa-file-contract"></i>
+                            Document Files
+                        </div>
+                        <div class="dropdown-items">
+                            <a href="compressor.html?type=pdf" class="dropdown-item document-item">
+                                <i class="fas fa-file-pdf pdf-icon"></i>
+                                <span>PDF</span>
+                            </a>
+                            <a href="compressor.html?type=doc" class="dropdown-item document-item">
+                                <i class="fas fa-file-word doc-icon"></i>
+                                <span>DOC</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#" class="nav-button login-btn">Login</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-meta">Secure File Conversion</div>
+        <h1 class="hero-headline">Convert Files Between Any Format</h1>
+        <div class="hero-subheadline">
+            <i class="fas fa-exchange-alt"></i>
+            <span>JPG to PNG, PDF to Word, and more - 100% Secure</span>
+        </div>
+    </section>
+
+    <!-- Converter Interface -->
+    <section class="content-section">
+        <h2 class="section-title">File Converter</h2>
+        
+        <!-- File Upload Area -->
+        <div class="drag-drop-area" id="dragDropArea">
+            <div class="drag-drop-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <div class="drag-drop-text">Drag & drop your file here or click to browse</div>
+            <button class="select-file-btn" id="selectFileBtn">Select File</button>
+            <input type="file" id="fileInput" style="display: none;">
+            
+            <div class="file-types">
+                <div class="file-type pdf">
+                    <i class="fas fa-file-pdf" style="color: #FF4444;"></i>
+                    <span>PDF</span>
+                </div>
+                <div class="file-type jpg">
+                    <i class="fas fa-file-image" style="color: #10B981;"></i>
+                    <span>JPG</span>
+                </div>
+                <div class="file-type png">
+                    <i class="fas fa-file-image" style="color: #3B82F6;"></i>
+                    <span>PNG</span>
+                </div>
+                <div class="file-type svg">
+                    <i class="fas fa-file-code" style="color: #F59E0B;"></i>
+                    <span>SVG</span>
+                </div>
+                <div class="file-type word">
+                    <i class="fas fa-file-word" style="color: #3B82F6;"></i>
+                    <span>WORD</span>
+                </div>
+                <div class="file-type excel">
+                    <i class="fas fa-file-excel" style="color: #10B981;"></i>
+                    <span>EXCEL</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- File Info Display -->
+        <div class="file-info-display" id="fileInfoDisplay">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h3><i class="fas fa-file-alt"></i> Selected File</h3>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fas fa-file" id="fileIcon"></i>
+                    <div id="fileName">No file selected</div>
+                    <small>File Name</small>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-weight-hanging"></i>
+                    <div id="fileSize">0 MB</div>
+                    <small>File Size</small>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-code"></i>
+                    <div id="fileType">Unknown</div>
+                    <small>File Type</small>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div id="fileDate">Just now</div>
+                    <small>Upload Time</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Converter Options -->
+        <div class="converter-options">
+            <div class="converter-side">
+                <h3><i class="fas fa-arrow-down"></i> Input Format</h3>
+                <div class="format-grid" id="inputFormats">
+                    <!-- Input formats will be populated based on file type -->
+                    <div class="format-card" data-format="auto">
+                        <i class="fas fa-magic" style="color: #8B5CF6;"></i>
+                        <div>Auto Detect</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="converter-side">
+                <h3><i class="fas fa-arrow-up"></i> Output Format</h3>
+                <div class="format-grid" id="outputFormats">
+                    <div class="format-card" data-format="jpg">
+                        <i class="fas fa-file-image" style="color: #10B981;"></i>
+                        <div>JPG</div>
+                    </div>
+                    <div class="format-card" data-format="png">
+                        <i class="fas fa-file-image" style="color: #3B82F6;"></i>
+                        <div>PNG</div>
+                    </div>
+                    <div class="format-card" data-format="pdf">
+                        <i class="fas fa-file-pdf" style="color: #FF4444;"></i>
+                        <div>PDF</div>
+                    </div>
+                    <div class="format-card" data-format="docx">
+                        <i class="fas fa-file-word" style="color: #3B82F6;"></i>
+                        <div>DOCX</div>
+                    </div>
+                    <div class="format-card" data-format="xlsx">
+                        <i class="fas fa-file-excel" style="color: #10B981;"></i>
+                        <div>XLSX</div>
+                    </div>
+                    <div class="format-card" data-format="svg">
+                        <i class="fas fa-file-code" style="color: #F59E0B;"></i>
+                        <div>SVG</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="converter-info">
+            <i class="fas fa-long-arrow-alt-right"></i>
+            <span>Convert to</span>
+            <i class="fas fa-long-arrow-alt-right"></i>
+        </div>
+        
+        <!-- Advanced Options -->
+        <div class="advanced-options">
+            <h3 style="text-align: center; margin-bottom: 25px;">
+                <i class="fas fa-sliders-h"></i> Conversion Settings
+            </h3>
+            
+            <div class="option-row">
+                <div class="tool-option">
+                    <label for="qualitySetting">Output Quality: <span id="qualityValue">85%</span></label>
+                    <input type="range" id="qualitySetting" min="10" max="100" value="85" step="5">
+                </div>
+                
+                <div class="tool-option">
+                    <label for="compressionLevel">Compression Level:</label>
+                    <select id="compressionLevel" style="width: 100%;">
+                        <option value="low">Low (Best Quality)</option>
+                        <option value="medium" selected>Medium (Recommended)</option>
+                        <option value="high">High (Smallest Size)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="option-row">
+                <div class="tool-option">
+                    <label>Resize Options:</label>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <input type="number" placeholder="Width (px)" id="resizeWidth" style="flex: 1;">
+                        <input type="number" placeholder="Height (px)" id="resizeHeight" style="flex: 1;">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="maintainAspect">
+                            <span>Maintain Aspect Ratio</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="tool-option">
+                    <label>Additional Options:</label>
+                    <div style="margin-top: 10px;">
+                        <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <input type="checkbox" id="optimizeImages">
+                            <span>Optimize Images</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <input type="checkbox" id="preserveMetadata">
+                            <span>Preserve Metadata</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="removeBackground" checked>
+                            <span>Remove Background (Images)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div style="text-align: center; margin: 40px 0;">
+            <button class="select-file-btn" id="convertBtn" style="padding: 20px 60px; font-size: 1.3rem;">
+                <i class="fas fa-sync-alt"></i> Convert File Now
+            </button>
+            <p style="margin-top: 15px; color: #64748B;">
+                <i class="fas fa-shield-alt"></i> Your file will be processed securely and deleted immediately
+            </p>
+        </div>
+        
+        <!-- Processing Section -->
+        <div class="processing-section" id="processingSection">
+            <h3 style="text-align: center; margin-bottom: 20px;">
+                <i class="fas fa-cogs"></i> Converting Your File
+            </h3>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div id="processingText">Initializing conversion process...</div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; color: #64748B;">
+                <i class="fas fa-lock"></i>
+                <small>Conversion in progress - Your file is encrypted during processing</small>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <h3 style="text-align: center; margin-bottom: 20px;">
+                <i class="fas fa-check-circle" style="color: #10B981;"></i>
+                Conversion Complete!
+            </h3>
+            
+            <div class="result-stats">
+                <div class="stat-card">
+                    <i class="fas fa-file"></i>
+                    <div>Original File</div>
+                    <div id="originalFormat" style="font-weight: bold;">Unknown</div>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <div>Converted To</div>
+                    <div id="convertedFormat" style="font-weight: bold; color: var(--primary-blue);">Unknown</div>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-weight-hanging"></i>
+                    <div>File Size</div>
+                    <div id="convertedSize" style="font-weight: bold;">0 MB</div>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-bolt"></i>
+                    <div>Processing Time</div>
+                    <div id="processingTime" style="font-weight: bold;">0.5s</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <button class="select-file-btn" id="downloadBtn" style="padding: 15px 40px;">
+                    <i class="fas fa-download"></i> Download Converted File
+                </button>
+                <button class="select-file-btn" style="padding: 15px 40px; margin-left: 15px; background-color: var(--primary-blue);">
+                    <i class="fas fa-redo"></i> Convert Another
+                </button>
+            </div>
+            
+            <div style="text-align: center; color: #64748B;">
+                <i class="fas fa-info-circle"></i>
+                <small>This file will be automatically deleted from our servers in 24 hours</small>
+            </div>
+        </div>
+        
+        <!-- Ad Section -->
+        <div class="ad-section">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-container" id="adContainer">
+                Upgrade to Premium for batch conversion and priority processing!
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Section -->
+    <section class="content-section" style="padding-top: 0;">
+        <div class="seo-section">
+            <h3>Professional File Conversion Service</h3>
+            <p>FlipFile's converter supports over 50 file formats including images, documents, spreadsheets, and presentations. Our advanced conversion algorithms ensure your files maintain their original quality while being transformed into your desired format.</p>
+            <p>All conversions are performed with military-grade encryption and automatic file deletion. We never store your original or converted files permanently, ensuring complete privacy for your sensitive documents.</p>
+            <p>Whether you need to convert images for web use, transform PDFs into editable documents, or change file formats for compatibility, FlipFile delivers professional results with security as our top priority.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:cyview4u@gmail.com">cyview4u@gmail.com</a></li>
+                    <li><i class="fas fa-globe"></i> <a href="https://www.flipfile.online" target="_blank">www.flipfile.online</a></li>
+                    <li><i class="fas fa-quote-left"></i> "The swift shift for your secure files."</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><i class="fas fa-shield-alt"></i> <a href="privacy.html">Privacy Policy</a></li>
+                    <li><i class="fas fa-file-contract"></i> <a href="terms.html">Terms of Service</a></li>
+                    <li><i class="fas fa-cookie-bite"></i> <a href="cookies.html">Cookie Policy</a></li>
+                    <li><i class="fas fa-database"></i> <a href="data-protection.html">Data Protection</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><i class="fas fa-blog"></i> <a href="blog.html">Blog</a></li>
+                    <li><i class="fas fa-question-circle"></i> <a href="faq.html">FAQ</a></li>
+                    <li><i class="fas fa-comment-dots"></i> <a href="feedback.html">Feedback</a></li>
+                    <li><i class="fas fa-headset"></i> <a href="support.html">Support Center</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Stay connected with FlipFile for updates and tips on file security.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 FlipFile. All rights reserved. | Designed with security and privacy in mind.</p>
+            <p class="footer-meta">The swift shift for your secure files.</p>
+        </div>
+    </footer>
+
+    <!-- File Processing Modal -->
+    <div class="processing-modal" id="processingModal">
+        <div class="modal-content">
+            <div class="processing-spinner"></div>
+            <h3>Converting Your File</h3>
+            <p id="modalProcessingText">Processing file securely...</p>
+            <div class="ad-container" style="margin-top: 20px; height: 80px;">
+                <i class="fas fa-bolt" style="color: #F59E0B;"></i>
+                <div>Premium users get 3x faster conversion!</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Converter-specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const selectFileBtn = document.getElementById('selectFileBtn');
+            const convertBtn = document.getElementById('convertBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const dragDropArea = document.getElementById('dragDropArea');
+            const fileInfoDisplay = document.getElementById('fileInfoDisplay');
+            const qualitySetting = document.getElementById('qualitySetting');
+            const qualityValue = document.getElementById('qualityValue');
+            const inputFormats = document.getElementById('inputFormats');
+            const outputFormats = document.getElementById('outputFormats');
+            const processingSection = document.getElementById('processingSection');
+            const resultsSection = document.getElementById('resultsSection');
+            
+            let selectedFile = null;
+            let selectedOutputFormat = 'jpg';
+            
+            // File type icons and supported conversions
+            const conversionMap = {
+                'jpg': { 
+                    name: 'JPEG Image', 
+                    icon: 'fa-file-image', 
+                    color: '#10B981',
+                    canConvertTo: ['png', 'pdf', 'webp', 'bmp', 'tiff', 'svg']
+                },
+                'png': { 
+                    name: 'PNG Image', 
+                    icon: 'fa-file-image', 
+                    color: '#3B82F6',
+                    canConvertTo: ['jpg', 'pdf', 'webp', 'bmp', 'tiff', 'svg']
+                },
+                'pdf': { 
+                    name: 'PDF Document', 
+                    icon: 'fa-file-pdf', 
+                    color: '#FF4444',
+                    canConvertTo: ['jpg', 'png', 'docx', 'txt', 'html', 'rtf']
+                },
+                'docx': { 
+                    name: 'Word Document', 
+                    icon: 'fa-file-word', 
+                    color: '#3B82F6',
+                    canConvertTo: ['pdf', 'txt', 'html', 'rtf', 'odt']
+                },
+                'xlsx': { 
+                    name: 'Excel Spreadsheet', 
+                    icon: 'fa-file-excel', 
+                    color: '#10B981',
+                    canConvertTo: ['pdf', 'csv', 'html', 'ods']
+                },
+                'svg': { 
+                    name: 'SVG Image', 
+                    icon: 'fa-file-code', 
+                    color: '#F59E0B',
+                    canConvertTo: ['jpg', 'png', 'pdf', 'webp', 'bmp']
+                }
+            };
+            
+            // Initialize quality slider
+            if (qualitySetting && qualityValue) {
+                qualitySetting.addEventListener('input', function() {
+                    qualityValue.textContent = this.value + '%';
+                });
+            }
+            
+            // Handle file selection
+            selectFileBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files[0]) {
+                    handleFileUpload(e.target.files[0]);
+                }
+            });
+            
+            // Drag and drop functionality
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dragDropArea.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    dragDropArea.classList.add('active');
+                }, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                dragDropArea.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    dragDropArea.classList.remove('active');
+                }, false);
+            });
+            
+            dragDropArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const files = e.dataTransfer.files;
+                if (files[0]) {
+                    handleFileUpload(files[0]);
+                }
+            }, false);
+            
+            // Format selection
+            outputFormats.addEventListener('click', (e) => {
+                const formatCard = e.target.closest('.format-card');
+                if (formatCard) {
+                    // Remove active class from all cards
+                    document.querySelectorAll('.format-card').forEach(card => {
+                        card.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked card
+                    formatCard.classList.add('active');
+                    selectedOutputFormat = formatCard.dataset.format;
+                }
+            });
+            
+            // Convert button click
+            convertBtn.addEventListener('click', async () => {
+                if (!selectedFile) {
+                    alert('Please select a file first!');
+                    return;
+                }
+                
+                // Show processing
+                processingSection.style.display = 'block';
+                resultsSection.style.display = 'none';
+                
+                // Simulate conversion process
+                await simulateConversion();
+            });
+            
+            // Download button click
+            downloadBtn.addEventListener('click', () => {
+                // Create a fake download
+                const blob = new Blob(['This is a simulated converted file'], { type: 'application/octet-stream' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `converted_file.${selectedOutputFormat}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                // Show success message
+                showSuccessMessage();
+            });
+            
+            // Helper functions
+            function handleFileUpload(file) {
+                selectedFile = file;
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+                
+                // Update file info display
+                updateFileInfo(file, fileExtension);
+                
+                // Show file info
+                fileInfoDisplay.style.display = 'block';
+                
+                // Update available output formats based on input
+                updateOutputFormats(fileExtension);
+            }
+            
+            function updateFileInfo(file, extension) {
+                document.getElementById('fileName').textContent = file.name;
+                document.getElementById('fileSize').textContent = formatFileSize(file.size);
+                document.getElementById('fileDate').textContent = new Date().toLocaleTimeString();
+                
+                const fileTypeInfo = conversionMap[extension] || { name: 'Unknown File', icon: 'fa-file', color: '#64748B' };
+                document.getElementById('fileType').textContent = fileTypeInfo.name;
+                document.getElementById('fileIcon').className = `fas ${fileTypeInfo.icon}`;
+                document.getElementById('fileIcon').style.color = fileTypeInfo.color;
+                document.getElementById('originalFormat').textContent = extension.toUpperCase();
+            }
+            
+            function updateOutputFormats(inputFormat) {
+                const supportedFormats = conversionMap[inputFormat]?.canConvertTo || ['jpg', 'png', 'pdf'];
+                
+                // Show/hide format cards based on compatibility
+                document.querySelectorAll('.format-card').forEach(card => {
+                    const format = card.dataset.format;
+                    if (supportedFormats.includes(format) || format === 'auto') {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Set first supported format as active
+                const firstSupported = document.querySelector(`.format-card[data-format="${supportedFormats[0]}"]`);
+                if (firstSupported) {
+                    document.querySelectorAll('.format-card').forEach(card => card.classList.remove('active'));
+                    firstSupported.classList.add('active');
+                    selectedOutputFormat = supportedFormats[0];
+                }
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            async function simulateConversion() {
+                const progressFill = document.getElementById('progressFill');
+                const processingText = document.getElementById('processingText');
+                const modalProcessingText = document.getElementById('modalProcessingText');
+                
+                const steps = [
+                    "Analyzing file structure...",
+                    "Extracting content...",
+                    "Converting format...",
+                    "Optimizing output...",
+                    "Applying security encryption...",
+                    "Finalizing conversion..."
+                ];
+                
+                // Show modal
+                document.getElementById('processingModal').style.display = 'flex';
+                
+                for (let i = 0; i < steps.length; i++) {
+                    const progress = ((i + 1) / steps.length) * 100;
+                    
+                    // Update progress bar
+                    if (progressFill) progressFill.style.width = `${progress}%`;
+                    
+                    // Update text
+                    if (processingText) processingText.textContent = steps[i];
+                    if (modalProcessingText) modalProcessingText.textContent = steps[i];
+                    
+                    // Wait for 1 second between steps
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+                
+                // Hide modal and show results
+                document.getElementById('processingModal').style.display = 'none';
+                processingSection.style.display = 'none';
+                resultsSection.style.display = 'block';
+                
+                // Update results
+                document.getElementById('convertedFormat').textContent = selectedOutputFormat.toUpperCase();
+                document.getElementById('convertedSize').textContent = formatFileSize(selectedFile.size * 0.8); // Simulate 20% size change
+                document.getElementById('processingTime').textContent = `${steps.length}.0s`;
+            }
+            
+            function showSuccessMessage() {
+                const message = document.createElement('div');
+                message.className = 'success-message';
+                message.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <span>File downloaded successfully! Temporary data deleted.</span>
+                `;
+                message.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #10B981;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    z-index: 3000;
+                    animation: fadeInUp 0.3s ease;
+                `;
+                
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                    message.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => document.body.removeChild(message), 300);
+                }, 3000);
+            }
+            
+            // Add global styles for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeOut {
+                    from { opacity: 1; transform: translateY(0); }
+                    to { opacity: 0; transform: translateY(-20px); }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
